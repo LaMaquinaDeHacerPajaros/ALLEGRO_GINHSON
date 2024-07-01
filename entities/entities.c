@@ -44,7 +44,7 @@ const object_kind_t snake_object_kind = {
 };
 
 const object_kind_t final_frog_object_kind = {
-    .hitbox_width=NORMAL_SIZE,
+    .hitbox_width=REZISE(NORMAL_SIZE),
     .attr = {.canKill = 0, .isEquippable = 0, .canMove = 0},
 };
 
