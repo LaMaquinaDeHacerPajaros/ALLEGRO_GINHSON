@@ -62,7 +62,7 @@ typedef struct{
     int32_t ms_reload;  //ms per movement
     background_t background; //background
     const object_kind_t * kind; //all dependant objects on the lane are of the same kind
-    
+    uint32_t flag;
     object_t objects[MAX_OBJECTS_PER_LANE]; //every dependant object variable data
     int32_t virtual_lane_end; //True logic lane lenght, DOESN'T correspond to visible lane length in-game
     int32_t virtual_lane_start; //ALWAYS LESS THAN 0-.kind->hitbox_width
