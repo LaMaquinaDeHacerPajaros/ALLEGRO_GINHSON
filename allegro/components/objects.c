@@ -68,3 +68,13 @@ void draw_bus(char direction, float dx, float dy){
 void draw_final_frog(float dx, float dy){
     //assets_t * final_frog = get_special_assets() + spaecial
 }
+void draw_frog(independent_object_t * frog, float dx, float dy){
+    assets_t * frogs_assets = get_frog_assets();
+    float sx = frogs_assets->sx;
+    float sy = frogs_assets->sy;
+    float sw = frogs_assets->sw;
+    float sh = frogs_assets->sh;
+
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    free(frogs_assets);
+}

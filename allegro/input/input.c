@@ -4,7 +4,9 @@
 dato_entrada input_reader(void){
     int return_value = _EMPTY;
     ALLEGRO_EVENT event_capture;
-    while(al_is_event_queue_empty(general_information.queue) && return_value == 0){
+    //printf("%d\n", al_is_event_queue_empty());
+    while(!al_is_event_queue_empty(general_information.queue) && return_value == _EMPTY){
+        printf("ENTRAMOS PAX\n");
         al_get_next_event(general_information.queue, &event_capture);
         switch (event_capture.type){
             case ALLEGRO_EVENT_KEY_DOWN:{

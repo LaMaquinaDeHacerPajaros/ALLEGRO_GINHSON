@@ -19,12 +19,14 @@ void renderWorld(map_t *map, independent_object_t* frog[], int size, int tiempo)
     for (i=0; i < LANES_COUNT; i++){
         draw_lane(&map->lanes[i], i);
     }
-    
+    // La ranita
+    draw_frog(frog[0], frog[0]->values.position,frog[0]->y_position);
     al_flip_display();
 }
 static void draw_lane(lane_t * lane, int row){
     draw_lane_background(lane, row);
     draw_lane_objects(lane, row);
+    
 }
 static void draw_lane_objects(lane_t *lane, int row){
     // Accedo a los objetos de lane y los renderizo
