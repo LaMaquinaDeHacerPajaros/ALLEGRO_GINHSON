@@ -4,6 +4,7 @@
 #include "../init.h"
 #include "../../config.h"
 #include "../../entities/entities.h"
+#include <stdio.h>
 void draw_car_v1(char direction, float dx, float dy){
     assets_t * cars_collection = get_cars_assets();
     int random;
@@ -38,6 +39,7 @@ void draw_log(int size, float dx, float dy){
         al_draw_scaled_bitmap(general_information.bitmap, logs[log].sx, logs[log].sy, logs[log].sw, logs[log].sh, dx + i * REZISE(logs[log].sw), dy, REZISE(logs[log].sw), REZISE(logs[log].sh), 0);
     }    
     al_draw_scaled_bitmap(general_information.bitmap, logs[2].sx, logs[2].sy, logs[2].sw, logs[2].sh, dx + i * REZISE(logs[log].sw), dy, REZISE(logs[2].sw), REZISE(logs[2].sh), 0);
+    free(logs);
     return;
 }
 void draw_snake(object_t * snake, float dx, float dy){
@@ -47,17 +49,20 @@ void draw_snake(object_t * snake, float dx, float dy){
     float sy = snakes[i].sy;
     float sw = snakes[i].sw;
     float sh = snakes[i].sh;
-    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sx), 0);
+    printf("SNAKE DRAWED\n");
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    free(snakes);
     return;
 }
 void draw_bus(char direction, float dx, float dy){
-    assets_t * bus = &(get_cars_assets()[trackl]);
-    float sx = bus->sx;
-    float sy = bus->sy;
-    float sw = bus->sw;
-    float sh = bus->sh;
-    printf("BUS DRAWED%f\n", sw);
+    assets_t * bus = get_cars_assets();
+    float sx = (bus+trackl)->sx;
+    float sy = (bus+trackl)->sy;
+    float sw = (bus+trackl)->sw;
+    float sh = (bus+trackl)->sh;
+    //printf("BUS DRAWED%f\n", sw);
     al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    free(bus);
     return;
 }
 void draw_final_frog(float dx, float dy){
