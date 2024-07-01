@@ -10,43 +10,41 @@ const object_kind_t empty_object={
 
 
 const object_kind_t bus_object_kind = {
-    .hitbox_width=1,
-    .attr = {.canKill = 1, .isEquippable = 0},
-    .hitbox_width=1,
+    .hitbox_width=REZISE(BIG_SIZE),
     .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t car_object_kind_v1 = {
-    .hitbox_width=1,
+    .hitbox_width=REZISE(NORMAL_SIZE),
     .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
 };
 const object_kind_t car_object_kind_v2 = {
-    .hitbox_width=1,
+    .hitbox_width=REZISE(NORMAL_SIZE),
     .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t small_log_object_kind={
-    .hitbox_width=1,
+    .hitbox_width=REZISE(3 * NORMAL_SIZE),
     .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t normal_log_object_kind = {
-    .hitbox_width=1,
+    .hitbox_width=REZISE(4 * NORMAL_SIZE),
     .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t big_log_object_kind = {
-    .hitbox_width=1,
+    .hitbox_width=REZISE(5 * NORMAL_SIZE),
     .attr = {.canKill = 0, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t snake_object_kind = {
-    .hitbox_width=1,
+    .hitbox_width=REZISE(BIG_SIZE),
     .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
 };
 
 const object_kind_t final_frog_object_kind = {
-    .hitbox_width=1,
+    .hitbox_width=NORMAL_SIZE,
     .attr = {.canKill = 0, .isEquippable = 0, .canMove = 0},
 };
 
