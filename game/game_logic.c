@@ -5,7 +5,7 @@
 #include "game_logic.h"
 #include "../entities/entities.h"
 #include "../allegro/input/input.h"
-#include "../finalAnimation/looseLife.h"
+
 
 static void updateMap(void);
 static void generateNewLevel(uint32_t _level);
@@ -179,7 +179,6 @@ void gameTick(int32_t ms_since_last_tick)
         }
         else
         {
-            //looseLife(remainingLives);
             resetRanitaPosition();
         }
             
