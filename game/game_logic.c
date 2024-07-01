@@ -29,14 +29,14 @@ static int32_t time_left_on_level = 0;
 
 independent_object_t ranita = {
     .params = {
-        .hitbox_width = 1,
+        .hitbox_width = NORMAL_SIZE,
         .attr = {.canKill=0, .canMove=1, .isEquippable=0},
                 
     }, 
-    .hitbox_height = LANE_PIXEL_HEIGHT,
-    .y_position = LANE_Y_PIXELS-1 - LANE_PIXEL_HEIGHT + 1,
+    .hitbox_height = REZISE(NORMAL_SIZE),
+    .y_position = LANE_Y_PIXELS-1 - NORMAL_SIZE + 1,
     .values.position = 0,
-    
+    .state = 0
 };
 
 
