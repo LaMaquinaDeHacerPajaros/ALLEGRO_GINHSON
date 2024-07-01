@@ -159,9 +159,9 @@ const object_kind_t final_frog_object_kind = {
             .background = water,
             .kind = &big_log_object_kind,
             .objects = {
-                [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS * 0.5,.doesExist=1},
+                [1]={.position=LANE_X_PIXELS*0.6,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*1.2,.doesExist=1},
                 [3]={.doesExist=0},
                 [4]={.doesExist=0}
             }
@@ -185,7 +185,7 @@ const object_kind_t final_frog_object_kind = {
             .background = water,
             .kind = &small_log_object_kind,
             .objects = {
-                [0]={.position=LANE_X_PIXELS*0.3,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.3,.doesExist=1},
                 [1]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*1.5,.doesExist=1},
@@ -199,7 +199,7 @@ const object_kind_t final_frog_object_kind = {
             .kind = &normal_log_object_kind,
             .objects = {
                 [0]={.position=0,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.25,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.25,.doesExist=1},
                 [2]={.position=LANE_X_PIXELS*0.5,.doesExist=1},
                 [3]={.position=LANE_X_PIXELS*0.9,.doesExist=1},
                 [4]={.position=LANE_X_PIXELS*1.8,.doesExist=1}
@@ -211,9 +211,9 @@ const object_kind_t final_frog_object_kind = {
             .background = water,
             .kind = &big_log_object_kind,
             .objects = {
-                [0]={.position=LANE_X_PIXELS*0.25,.doesExist=1},
-                [1]={.position=LANE_X_PIXELS*0.4,.doesExist=1},
-                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=1},
+                [0]={.position=-LANE_X_PIXELS*0.6,.doesExist=1},
+                [1]={.position=-LANE_X_PIXELS*0.1,.doesExist=1},
+                [2]={.position=LANE_X_PIXELS*0.8,.doesExist=0},
                 [3]={.position=LANE_X_PIXELS*1.6,.doesExist=1},
                 [4]={.doesExist=0}
             }
@@ -552,10 +552,10 @@ int32_t fillMap(map_t *_map, uint32_t _level)
                 _map->lanes[i] = grass_arquetypes[rand() % grass_arquetypes_elements];
                 break;
         }
-        _map->lanes[i].virtual_lane_start = -3;
+        _map->lanes[i].virtual_lane_start = -LANE_X_PIXELS;
         _map->lanes[i].ms_to_next= 10;
-        _map->lanes[i].ms_reload = 50;
-        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS + 5; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
+        _map->lanes[i].ms_reload = 30;
+        _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
     }
     //printMap(_map);
     return 0;
