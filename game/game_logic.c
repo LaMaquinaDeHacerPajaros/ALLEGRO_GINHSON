@@ -386,7 +386,7 @@ static const object_kind_t * collisionAnalysis(void)
             //printf("Ranita was found to appear on lane %d\n",i);
             for(j=0;j<object_bound;j++)
             {
-                if (map.lanes[i].objects->doesExist == 0) //Este objeto no existe en esta lane
+                if (map.lanes[i].objects[j].doesExist == 0) //Este objeto no existe en esta lane
                 {
                     continue;
                 }
