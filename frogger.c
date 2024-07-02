@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     while(1)
     {
         gameTick(10);
-        usleep(1000);
+        usleep(10000);
     }
     return 0;
 }

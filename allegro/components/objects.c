@@ -49,7 +49,7 @@ void draw_snake(object_t * snake, float dx, float dy){
     float sy = snakes[i].sy;
     float sw = snakes[i].sw;
     float sh = snakes[i].sh;
-    printf("SNAKE DRAWED\n");
+    
     al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
     free(snakes);
     return;

@@ -12,7 +12,7 @@
 #define BOTTOM_SIZE 32
 #define TOTAL_ROWS 16
 #define TOTAL_COLUMNS 12
-#define REZISE(x) (2.75*(x))
+#define REZISE(x) (1*(x))
 #define TOTAL_WIDTH (REZISE(TOTAL_COLUMNS* NORMAL_SIZE))
 #define TOTAL_HEIGHT (REZISE(BOTTOM_SIZE + SHORT_SIZE + TOTAL_ROWS * NORMAL_SIZE))
 #define ROW(x) (REZISE(SHORT_SIZE + NORMAL_SIZE * (x)))
@@ -27,7 +27,7 @@
 #if defined(PC)
     #define LANE_X_PIXELS (TOTAL_WIDTH)
     #define LANE_Y_PIXELS ((int32_t)REZISE(NORMAL_SIZE * LANES_COUNT))
-    #define MS_RANITA_MOVEMENT_COOLDOWN 100
+    #define MS_RANITA_MOVEMENT_COOLDOWN 20
 
 #elif defined(RPI)
     #define LANE_X_PIXELS 12

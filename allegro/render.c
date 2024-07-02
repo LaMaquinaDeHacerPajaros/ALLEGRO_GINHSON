@@ -57,6 +57,7 @@ static void draw_lane_objects(lane_t *lane, int row){
                 draw_snake(lane->objects + i, x, y);
             } 
             
+            
         } 
     }
 }

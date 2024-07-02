@@ -27,18 +27,20 @@ static const uint32_t lane_bound = sizeof(map.lanes)/sizeof(map.lanes[0]);
 static const uint32_t object_bound = sizeof(map.lanes[0].objects)/sizeof(map.lanes[0].objects[0]);
 static int32_t time_left_on_level = 0;
 
-independent_object_t ranita = {
-    .params = {
-        .hitbox_width = NORMAL_SIZE,
-        .attr = {.canKill=0, .canMove=1, .isEquippable=0},
-                
-    }, 
-    .hitbox_height = REZISE(NORMAL_SIZE),
-    .y_position = LANE_Y_PIXELS-1 - NORMAL_SIZE + 1,
-    .values.position = 0,
-    .state = 0
-};
-
+#if defined(PC)
+    independent_object_t ranita = {
+        .params = {
+            .hitbox_width = REZISE(NORMAL_SIZE),
+            .attr = {.canKill=0, .canMove=1, .isEquippable=0},
+                    
+        }, 
+        .hitbox_height = REZISE(NORMAL_SIZE),
+        .y_position = LANE_Y_PIXELS-1 - REZISE(NORMAL_SIZE) + 1,
+        .values.position = 0,
+        .state = 0
+    };
+#elif defined(RPI)
+#endif
 
 static const independent_object_t * iobjs[10] = {[0]=&ranita,NULL,NULL,NULL,NULL,NULL};
 
@@ -56,15 +58,14 @@ void gameTick(int32_t ms_since_last_tick)
     const object_kind_t * collision ;
 
 
-    puts("Map before executing gameTick:\n");
-    printMap(&map,0);
+    
     ms_cooldown -= ms_since_last_tick;
-    if(ms_cooldown < 0) //we can check for movement again 
+    if(ms_cooldown <= 0) //we can check for movement again 
     {
         
         ms_cooldown = 0;
         dato_entrada a = input_reader();
-        printf("%d\n", a);
+       
         switch(a)
         {
             case _EMPTY:
@@ -154,7 +155,6 @@ void gameTick(int32_t ms_since_last_tick)
                 }
                 else //map.lanes[i].direction == LEFT
                 {
-                    
                     map.lanes[i].objects[j].position -= 1;
                     
                     start_object_x = map.lanes[i].objects[j].position;
@@ -196,11 +196,11 @@ void gameTick(int32_t ms_since_last_tick)
     else if (collision != NULL && map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].background == water)
     {
         //Es un tronco
-        if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].flag = 1)
+        if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].flag == 1)
         {
             if (map.lanes[ranita.y_position/LANE_PIXEL_HEIGHT].direction == RIGHT)
             {
-                ranita.values.position+=1;
+                ranita.values.position += 1;
             }
             else
             {
@@ -270,7 +270,7 @@ void gameTick(int32_t ms_since_last_tick)
         }
     }
     
-    renderWorld(&map, iobjs, 1, 64);
+    renderWorld(&map, iobjs, 1, time_left_on_level);
 }
 
 
@@ -281,10 +281,14 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
     switch(_direction)
     {
         case RANITA_DOWN:
+
+            
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
-            if (temp + ranita.hitbox_height >= LANE_Y_PIXELS) //would go below map, set is as low as possible
+            printf("%d %d\n",temp, temp+ranita.hitbox_height);
+            sleep(1);
+            if (temp + ranita.hitbox_height > LANE_Y_PIXELS) //would go below map, set is as low as possible
             {
-                ranita.y_position = LANE_Y_PIXELS - ranita.hitbox_height; //lowest pixel for the upper left corner
+                ranita.y_position = LANE_Y_PIXELS  - 1 - ranita.hitbox_height + 1; //lowest pixel for the upper left corner
             }
             else
             {
@@ -310,7 +314,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
         case RANITA_LEFT:
             
             temp2 = ranita.values.position - ranita.params.hitbox_width;
-            printf("RANITA MOVED LEFT!! new position would be %d\n",temp2);
+            
             if (temp2 <= 0) //would go left from mapside
             {
                 ranita.values.position = 0; //leftmost pixel for the upper left corner
@@ -419,8 +423,8 @@ static void triggerDeath(void)
 
 static void resetRanitaPosition(void)
 {
-    ranita.y_position = LANE_Y_PIXELS - 1 - ranita.hitbox_height + 1;
-    ranita.values.position = LANE_X_PIXELS / 2;
+    ranita.y_position = LANE_Y_PIXELS - 1 - ranita.hitbox_height + 1 ;
+    ranita.values.position = (LANE_X_PIXELS-ranita.params.hitbox_width)/2 ;
 }
 
 
@@ -434,5 +438,6 @@ void initializeGameLogic(void)
     srand(time(NULL));
     level = 0;
     fillMap(&map,level);
+    resetRanitaPosition();
     printf("lane bound = %d\n",lane_bound);
 }
