@@ -314,6 +314,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             }
             else
             {
+                
                 ranita.values.position+= ranita.params.hitbox_width;
             }
             break;
@@ -383,8 +384,7 @@ static const object_kind_t * collisionAnalysis(void)
                     {
                         map.lanes[i].objects[j].doesExist = 1;
                         
-                        puts("RETURNED FREE SLOT!!!!");
-                        sleep(4);   
+                           
                         return &freeSlot;
                         
                     }
