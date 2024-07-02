@@ -48,7 +48,7 @@ typedef struct{
     object_t values;
     int32_t y_position;
     const uint32_t hitbox_height; //SHOULD CORRESPOND WITH GRAPHICS HEIGHT!!!
-    uint32_t state;
+    
 }independent_object_t;
 
 typedef enum{

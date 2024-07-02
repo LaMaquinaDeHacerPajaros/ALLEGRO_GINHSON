@@ -75,6 +75,6 @@ void draw_frog(independent_object_t * frog, float dx, float dy){
     float sw = frogs_assets->sw;
     float sh = frogs_assets->sh;
 
-    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx, dy, REZISE(sw), REZISE(sh), 0);
+    al_draw_scaled_bitmap(general_information.bitmap, sx, sy, sw, sh, dx , dy + REZISE(SHORT_SIZE), REZISE(sw), REZISE(sh), 0);
     free(frogs_assets);
 }

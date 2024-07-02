@@ -19,6 +19,7 @@
 #define LANES_COUNT 16
 #define MAX_OBJECTS_PER_LANE 5
 
+#define TIME_MICROSECONDS 10000
 
 #if !defined(PC) && !defined(RPI)
     #define PC

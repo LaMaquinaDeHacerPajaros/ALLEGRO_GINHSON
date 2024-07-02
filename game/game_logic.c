@@ -37,7 +37,6 @@ static int32_t time_left_on_level = 0;
         .hitbox_height = REZISE(NORMAL_SIZE),
         .y_position = LANE_Y_PIXELS-1 - REZISE(NORMAL_SIZE) + 1,
         .values.position = 0,
-        .state = 0
     };
 #elif defined(RPI)
 #endif
@@ -285,7 +284,7 @@ static void triggerRanitaMovement(ranita_logic_direction_t _direction)
             
             temp = ranita.y_position + ranita.hitbox_height - 1; //y position of the bottom
             printf("%d %d\n",temp, temp+ranita.hitbox_height);
-            sleep(1);
+           
             if (temp + ranita.hitbox_height > LANE_Y_PIXELS) //would go below map, set is as low as possible
             {
                 ranita.y_position = LANE_Y_PIXELS  - 1 - ranita.hitbox_height + 1; //lowest pixel for the upper left corner
@@ -360,8 +359,9 @@ static const object_kind_t * collisionAnalysis(void)
     //puts("starting collision analysis");
     printf("ranita.y_position = %d\nranita.hitbox_height = %d\nranita.position = %d\nranita.params.hitbox_width=%d\n\n",ranita.y_position,ranita.hitbox_height,ranita.values.position,ranita.params.hitbox_width);
     
-    start_ranita_y = ranita.y_position - ranita.hitbox_height + 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
-    end_ranita_y = ranita.y_position; 
+    end_ranita_y = ranita.y_position + ranita.hitbox_height - 1;//Porque ranita.y_position ya tienen en cuenta el primer pixel
+    printf("%d\n", start_ranita_y);
+    start_ranita_y = ranita.y_position; 
     start_ranita_x = ranita.values.position;
     end_ranita_x = ranita.values.position + ranita.params.hitbox_width - 1; //Porque position tiene en cuenta el primer pixel
 

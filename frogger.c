@@ -4,6 +4,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "allegro/init.h"
+#include "config.h"
 int main(int argc, char **argv)
 {
     puts("frogger");
@@ -12,7 +13,7 @@ int main(int argc, char **argv)
     while(1)
     {
         gameTick(10);
-        usleep(10000);
+        usleep(TIME_MICROSECONDS);
     }
     return 0;
 }
