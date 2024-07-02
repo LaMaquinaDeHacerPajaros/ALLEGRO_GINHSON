@@ -29,7 +29,8 @@
     #define LANE_X_PIXELS (TOTAL_WIDTH)
     #define LANE_Y_PIXELS ((int32_t)REZISE(NORMAL_SIZE * LANES_COUNT))
     #define MS_RANITA_MOVEMENT_COOLDOWN 20
-
+    #define MS_BASE_OBJECT_SPEED 30
+    #define TIME_PER_LEVEL_MS 30000
 #elif defined(RPI)
     #define LANE_X_PIXELS 12
     #define LANE_Y_PIXELS 16

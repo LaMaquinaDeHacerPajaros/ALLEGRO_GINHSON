@@ -8,6 +8,7 @@ const object_kind_t empty_object={
     .hitbox_width = 0,
 };
 
+const object_kind_t freeSlot;
 
 const object_kind_t bus_object_kind = {
     .hitbox_width=REZISE(BIG_SIZE),
@@ -43,9 +44,9 @@ const object_kind_t snake_object_kind = {
     .attr = {.canKill = 1, .isEquippable = 0, .canMove = 1},
 };
 
-const object_kind_t final_frog_object_kind = {
-    .hitbox_width=NORMAL_SIZE,
-    .attr = {.canKill = 0, .isEquippable = 0, .canMove = 0},
+const object_kind_t lilypad_object_kind = {
+    .hitbox_width=REZISE(NORMAL_SIZE),
+    .attr = {.canKill = 1, .isEquippable = 0, .canMove = 0},
 };
 
 
@@ -256,14 +257,15 @@ const object_kind_t final_frog_object_kind = {
         {
             .direction = RIGHT,
             .background = finish_line,
-            .kind = &final_frog_object_kind,
+            .kind = &lilypad_object_kind, //why not lilypad here?
             .objects = {
-                [0]={.position=1,.doesExist=0},
-                [1]={.position=3,.doesExist=0},
-                [2]={.position=5,.doesExist=0},
-                [3]={.position=7,.doesExist=0},
-                [4]={.position=9,.doesExist=0}
+                [0]={.position=REZISE(NORMAL_SIZE)*1,.doesExist=0,.lily_flag=1},
+                [1]={.position=REZISE(NORMAL_SIZE)*3,.doesExist=0,.lily_flag=1},
+                [2]={.position=REZISE(NORMAL_SIZE)*5,.doesExist=0,.lily_flag=1},
+                [3]={.position=REZISE(NORMAL_SIZE)*7,.doesExist=0,.lily_flag=1},
+                [4]={.position=REZISE(NORMAL_SIZE)*9,.doesExist=0,.lily_flag=1}
             }   
+            
         }
     };
 //________________________________________________________________
@@ -505,7 +507,9 @@ static void printLane(lane_t * _lane);
 int32_t fillMap(map_t *_map, uint32_t _level)
 {
     uint32_t i;
-    
+    static const uint32_t speeds[] = {MS_BASE_OBJECT_SPEED*0.3f,MS_BASE_OBJECT_SPEED*0.4f,
+    MS_BASE_OBJECT_SPEED * 0.5f,MS_BASE_OBJECT_SPEED * 0.6f,MS_BASE_OBJECT_SPEED * 0.7f,
+    MS_BASE_OBJECT_SPEED*0.8,MS_BASE_OBJECT_SPEED,MS_BASE_OBJECT_SPEED*1.2f};
     //printf("lane bound on fill map = %d\n",lane_bound);
     //printf("Available Arquetypes Element:\n\troad: %d\n\tgrass: %d\n\twater: %d\n\tfinish_line: %d\n\n"
     //,road_arquetypes_elements,grass_arquetypes_elements,water_arquetypes_elements,finish_line_arquetypes_elements);
@@ -554,7 +558,7 @@ int32_t fillMap(map_t *_map, uint32_t _level)
         }
         _map->lanes[i].virtual_lane_start = -LANE_X_PIXELS;
         _map->lanes[i].ms_to_next= 10;
-        _map->lanes[i].ms_reload = 30;
+        _map->lanes[i].ms_reload = speeds[rand() % (sizeof(speeds)/sizeof(*speeds))] / (_level+1);
         _map->lanes[i].virtual_lane_end =LANE_X_PIXELS*2; //CAMBIAR ESTO, DEBERIA SER CONST Y PREDEFINIDO EN PATRON
     }
     //printMap(_map);

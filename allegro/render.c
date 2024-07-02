@@ -54,8 +54,12 @@ static void draw_lane_objects(lane_t *lane, int row){
             } else if (lane->kind == &big_log_object_kind){
                 draw_log(3, x, y);
             } else if (lane->kind == &snake_object_kind){
-                draw_snake(lane->objects + i, x, y);
+                draw_snake(lane->objects + i, x, y); //checkear este acceso, .objects[j], no ->objects
             } 
+              else if (lane->kind == &lilypad_object_kind)
+            {
+                draw_car_v1(lane->direction,x,y);
+            }
             
             
         } 
